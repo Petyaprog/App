@@ -12,5 +12,5 @@ fun main() {
     val sum: Int = sum_user.toInt()
     val tax: Double = calcTax(sum)
 
-    println("For $sum tax is $tax")
+    println("For $sum RGRGR is $tax")
 }
