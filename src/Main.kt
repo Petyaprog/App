@@ -1,16 +1,12 @@
-fun calcTax(sum: Int = 1000): Double {
-    val tax_ratio = 0.13
-
-    return tax_ratio * sum.toDouble()
-}
-
 fun main() {
-    val sum_user: String? = readLine()  //  или  val sum_user = readLine()!!.toInt()
+    val str: String? = readLine()
+    var zeros_count:Int = 0
 
-    if (sum_user == null) return
+    if (str == null) {return}
 
-    val sum: Int = sum_user.toInt()
-    val tax: Double = calcTax(sum)
+    for (i in str) {
+        if (i == '0') zeros_count++
+    }
 
-    println("For $sum tax is $tax")
+    println("Колличество нулей: $zeros_count")
 }
