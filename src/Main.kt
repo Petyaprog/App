@@ -1,12 +1,16 @@
 fun main() {
     val str: String? = readLine()
-    var zeros_count = 0
-
-    if (str == null) {return}
-
-    for (i in str) {
-        if (i == '0') zeros_count++
+    var digit: Int
+    when(str) {
+        "one" -> digit = 1
+        "two" -> digit = 2
+        "three" -> digit = 3
+        "four" -> digit = 4
+        "five" -> digit = 5
+        else -> {
+            println("Invalid input")
+            return
+        }
     }
-
-    println("Колличество нулей: $zeros_count")
+    println(digit)
 }
