@@ -1,6 +1,6 @@
 fun main() {
     val str: String? = readLine()
-    var zeros_count:Int = 0
+    var zeros_count = 0
 
     if (str == null) {return}
 
