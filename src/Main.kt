@@ -1,17 +1,16 @@
+open class item (var lvl: Int, var weight: Double)
+
+open class weapon (lvl: Int, weight: Double): item(lvl, weight) {
+    open fun calcDamage(): Int = 42
+}
+
+class magic_weapon (lvl: Int, weight: Double): weapon (lvl, weight) {
+    override fun calcDamage(): Int = super.calcDamage()*2
+}
+
 fun main(args: Array<String>) {
 
-    val str:String? = readLine()
+    val instance: magic_weapon = magic_weapon (1, 1.0)
 
-    if (str == null) return
-
-    val list_of_numbers = str.split( ",")
-
-    var sum: Int = 0
-
-    for (number in list_of_numbers) {
-
-        sum += try { number.toInt() } catch (e: NumberFormatException) {0}
-
-    }
-    println("Sum = ${sum}")
+    println("Damage = ${instance.calcDamage()}")
 }
