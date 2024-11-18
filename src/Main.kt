@@ -1,16 +1,30 @@
-open class item (var lvl: Int, var weight: Double)
+class player(var str: Int = 0, var dex: Int=0, var XP: Int=0, var lvl: Int=1,
+             var nextLvlXP: Int = 10) {
 
-open class weapon (lvl: Int, weight: Double): item(lvl, weight) {
-    open fun calcDamage(): Int = 42
-}
+    fun recieveXP(xp: Int) {
+        XP+=xp
+        if (XP >= nextLvlXP) lvlUP()
+        println("str=${str} dex=${dex} lvl=${lvl}")
 
-class magic_weapon (lvl: Int, weight: Double): weapon (lvl, weight) {
-    override fun calcDamage(): Int = super.calcDamage()*2
+    }
+
+    private fun lvlUP() {
+        lvl += 1
+        str += if (lvl % 2 == 0) 1 else 0
+        dex += if (lvl % 2 == 1) 1 else 0
+
+        nextLvlXP += 100
+
+    }
 }
 
 fun main(args: Array<String>) {
 
-    val instance: magic_weapon = magic_weapon (1, 1.0)
+    var p: player = player(str = 2)
 
-    println("Damage = ${instance.calcDamage()}")
+    p.recieveXP(10)
+
+    p.recieveXP(100)
+
+    p.recieveXP(100)
 }
