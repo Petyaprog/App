@@ -1,65 +1,60 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import android.graphics.Color
+
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var tw: TextView
-    private lateinit var et: EditText
+    private lateinit var bt: Button
+    private lateinit var root_layout: LinearLayout
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tw = findViewById(R.id.textView1)
-        et = findViewById(R.id.editText1)
+        bt = findViewById(R.id.button)
+        root_layout = findViewById(R.id.root_layout)
 
-        var counter = 0
+        bt.setOnClickListener{
+            // Для создания AlertDialog используется внутренний класс AlertDialog.Builder
+            val builder = AlertDialog.Builder(this@MainActivity)
 
-        et.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            // Заголовок AlertDialog задаётся при помощи метода setTitle
+            builder.setTitle("App background color")
+
+            // Текст AlertDialog задаётся при помощи метода setMessage
+            builder.setMessage("Are you want to set the app background color to RED?")
+
+            // Установка текста кнопки соглашения в диалоге и обработчика по нажатию
+            builder.setPositiveButton("YES"){dialog, which ->
+                // Действия при нажатии кнопки соглашения в диалоге: всплывающее сообщение и смена цвета фона
+                Toast.makeText(applicationContext,"Ok, we change the app background.",Toast.LENGTH_SHORT).show()
+                root_layout.setBackgroundColor(Color.RED)
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            // Установка текста кнопки отказа в диалоге и обработчика по нажатию
+            builder.setNegativeButton("No"){dialog,which ->
+                Toast.makeText(applicationContext,"You are not agree.",Toast.LENGTH_SHORT).show()
             }
 
-            override fun afterTextChanged(s: Editable?) {
-                var text = s.toString()
-                when {
-                    text.contains("question") -> {
-                        text = text.replaceFirst("question", "answer")
-                        counter++
-                        tw.text = "$counter"
-                        et.setText(text)
-                        et.setSelection(et.length())
-                    }
-
-                    text.contains("request") -> {
-                        text = text.replaceFirst("request", "response")
-                        counter++
-                        tw.text = "$counter"
-                        et.setText(text)
-                        et.setSelection(et.length())
-                    }
-
-                    text.contains("problem") -> {
-                        text = text.replaceFirst("problem", "task")
-                        counter++
-                        tw.text = "$counter"
-                        et.setText(text)
-                        et.setSelection(et.length())
-                    }
-                }
+            // Установка текста кнопки отмены в диалоге и обработчика по нажатию
+            builder.setNeutralButton("Cancel"){_,_ ->
+                Toast.makeText(applicationContext,"You cancelled the dialog.",Toast.LENGTH_SHORT).show()
             }
-        })
+
+            // Создание настроенного экземпляра AlertDialog
+            val dialog: AlertDialog = builder.create()
+
+            // Вывод на экран созданного AlertDialog
+            dialog.show()
+        }
     }
 }
