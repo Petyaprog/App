@@ -23,15 +23,42 @@ class MainActivity : ComponentActivity() {
         tw = findViewById(R.id.textView1)
         et = findViewById(R.id.editText1)
 
+        var counter = 0
+
         et.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                tw.setText("${count}")
             }
 
             override fun afterTextChanged(s: Editable?) {
+                var text = s.toString()
+                when {
+                    text.contains("question") -> {
+                        text = text.replaceFirst("question", "answer")
+                        counter++
+                        tw.text = "$counter"
+                        et.setText(text)
+                        et.setSelection(et.length())
+                    }
+
+                    text.contains("request") -> {
+                        text = text.replaceFirst("request", "response")
+                        counter++
+                        tw.text = "$counter"
+                        et.setText(text)
+                        et.setSelection(et.length())
+                    }
+
+                    text.contains("problem") -> {
+                        text = text.replaceFirst("problem", "task")
+                        counter++
+                        tw.text = "$counter"
+                        et.setText(text)
+                        et.setSelection(et.length())
+                    }
+                }
             }
         })
     }
