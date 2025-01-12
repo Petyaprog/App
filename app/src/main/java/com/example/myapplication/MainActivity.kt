@@ -1,41 +1,40 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var allSpinners: Array<Array<Spinner>>
-    val toChooseList: List<String> = listOf(" ", "X", "0")
+    private lateinit var but: Button
+    private lateinit var tw: TextView
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        allSpinners = Array(4) { Array(4) { Spinner(this) } }
+        but = findViewById(R.id.button)
 
-        allSpinners[1][1] = findViewById(R.id.spinner1)
-        allSpinners[1][2] = findViewById(R.id.spinner2)
-        allSpinners[1][3] = findViewById(R.id.spinner3)
-        allSpinners[2][1] = findViewById(R.id.spinner4)
-        allSpinners[2][2] = findViewById(R.id.spinner5)
-        allSpinners[2][3] = findViewById(R.id.spinner6)
-        allSpinners[3][1] = findViewById(R.id.spinner7)
-        allSpinners[3][2] = findViewById(R.id.spinner8)
-        allSpinners[3][3] = findViewById(R.id.spinner9)
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, toChooseList)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        for (i in 1..3) {
-            for (j in 1..3) {
-                allSpinners[i][j].setAdapter(adapter)
-            }
+        but.setOnClickListener {
+            val myintent = Intent(this, MainActivity2::class.java)
+            startActivityForResult(myintent, 1)
         }
+    }
 
+    @Deprecated("Deprecated in Java")
+    @SuppressLint("MissingSuperCall", "SetTextI18n")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        tw = findViewById(R.id.textView)
+        if (data == null) return
+        when(requestCode) {
+            1 -> tw.text = data.getStringExtra("name")
+            else -> tw.text = "Different request code $requestCode"
+        }
     }
 }
