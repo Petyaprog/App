@@ -6,82 +6,70 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="23dp"
-        android:ems="10"
-        android:hint="Введите текст"
-        android:gravity="top"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/stats_view"
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="306dp"
+        android:layout_height="325dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="25dp"
+        android:stretchColumns="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/unsaved_changes_view"
-        android:layout_width="79dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="180dp"
-        android:layout_marginBottom="27dp"
-        android:text="кол-во слов"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/stats_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.89" />
+        <TableRow>
 
-    <TextView
-        android:id="@+id/stats_view"
-        android:layout_width="109dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="27dp"
-        android:text="статус"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/unsaved_changes_view"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="398dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="11dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stats_view">
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="save" />
+            <Spinner
+                android:id="@+id/spinner3"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/load_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="load" />
+        <TableRow>
 
-        <Button
-            android:id="@+id/clear_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="clear" />
-    </LinearLayout>
+            <Spinner
+                android:id="@+id/spinner4"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+            <Spinner
+                android:id="@+id/spinner5"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+            <Spinner
+                android:id="@+id/spinner6"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <Spinner
+                android:id="@+id/spinner7"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+            <Spinner
+                android:id="@+id/spinner8"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+            <Spinner
+                android:id="@+id/spinner9"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
