@@ -1,50 +1,50 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
-import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import java.io.File
+import androidx.core.app.NotificationCompat
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var filepath: EditText
-    private lateinit var result: TextView
-    private lateinit var perform: Button
+    private lateinit var button: Button
 
-    @SuppressLint("MissingInflatedId", "SetTextI18n")
+    @SuppressLint("MissingInflatedId", "SetTextI18n", "PrivateResource")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        filepath = findViewById(R.id.editTextText)
-        result = findViewById(R.id.textView)
-        perform = findViewById(R.id.button)
+        button = findViewById(R.id.button)
 
-        val fileName = "fileName"
-        val fileContent = "Привет"
-        this.openFileOutput(fileName, Context.MODE_PRIVATE).write(fileContent.toByteArray())
+        val channelId = "my_channel_id"
+        val channelName = "My Channel"
 
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            perform.setOnClickListener {
-                if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-                    result.text = File(
-                        Environment.getExternalStorageDirectory(),
-                        filepath.text.toString()
-                    ).readText()
-                }
-            }
-        } else {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        // Создание NotificationManager
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // Создание канала уведомлений (для Android 8.0 и выше)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(channel)
         }
 
+        button.setOnClickListener {
+            // Создание уведомления
+            val notification = NotificationCompat.Builder(this, channelId)
+                .setContentTitle("Заголовок уведомления")
+                .setContentText("Текст уведомления")
+                .setSmallIcon(android.R.drawable.sym_def_app_icon) // Замените на ваш иконку
+                .setAutoCancel(true) // Уведомление исчезнет при нажатии
+                .build()
+
+            // Отправка уведомления
+            notificationManager.notify(1, notification)
+        }
     }
 
 }
